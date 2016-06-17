@@ -1,0 +1,18 @@
+Package: rvcheck
+Type: Package
+Title: R/Package Version Check
+Version: 0.0.2
+Authors@R: c(person(given = "Guangchuang", family = "Yu",
+	   	    email = "guangchuangyu@gmail.com",
+		    role  = c("aut", "cre"))
+	    )
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
+Description: Check latest release version of R and R package (both in 'CRAN' or 'Bioconductor').
+Depends:
+    R (>= 3.3.0)
+Imports:
+    utils
+License: Artistic-2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
