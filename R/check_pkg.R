@@ -47,9 +47,11 @@ check_release <- function(base_url, pkg, msg) {
     x <- readLines(url)
     remote_version <- gsub("\\D+([\\.0-9]+)\\D+", '\\1', x[grep("Version", x)+1])
 
-    res <- list(installed_version = installed_version,
+    res <- list(package = pkg,
+                installed_version = installed_version,
                 latest_version = remote_version,
                 up_to_date = NA)
+    
     if (is.na(installed_version)) {
         message(paste("##", pkg, "is not installed..."))
         message(msg)
