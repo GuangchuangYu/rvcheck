@@ -64,7 +64,7 @@ check_release <- function(base_url, pkg, msg) {
             message("package is up-to-date release version")
             res$up_to_date <- TRUE
         } else {
-            message("devel branch is used, this function only work for release version...")
+            message("devel branch is used, this function only works for release version...")
         }
     }
     
