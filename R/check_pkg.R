@@ -1,9 +1,46 @@
+##' check latest github version of R package
+##'
+##' 
+##' @title check_github
+##' @param pkg package name
+##' @return list
+##' @export
+##' @author Guangchuang Yu
+check_github <- function(pkg) {
+    installed_version <- tryCatch(packageVersion(gsub(".*/", "", pkg)), error=function(e) NA)
+    
+    url <- paste0("https://raw.githubusercontent.com/", pkg, "/master/DESCRIPTION")
+    x <- readLines(url)
+    remote_version <- gsub("Version:\\s*", "", x[grep('Version:', x)])
+    
+    res <- list(package = pkg,
+                installed_version = installed_version,
+                latest_version = remote_version,
+                up_to_date = NA)
+    
+    if (is.na(installed_version)) {
+        message(paste("##", pkg, "is not installed..."))
+        message(msg)
+    } else {
+        if (remote_version > installed_version) {
+            message(paste("##", pkg, "is out of date..."))
+            message(msg)
+            res$up_to_date <- FALSE
+        } else if (remote_version == installed_version) {
+            message("package is up-to-date devel version")
+            res$up_to_date <- TRUE
+        }
+    }
+    
+    return(res)
+}
+
 ##' check latest release version of bioconductor package
 ##'
 ##' 
 ##' @title check_bioc
 ##' @param pkg package name
-##' @return NULL
+##' @return list
 ##' @export
 ##' @examples
 ##' \dontrun{
@@ -24,7 +61,7 @@ check_bioc <- function(pkg="BiocInstaller") {
 ##' 
 ##' @title check_cran
 ##' @param pkg package name
-##' @return NULL
+##' @return list
 ##' @export
 ##' @examples
 ##' \dontrun{

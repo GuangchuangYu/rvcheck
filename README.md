@@ -10,7 +10,7 @@ rvcheck: Check R/Package Version
 
 ## Authors ##
 
-Guangchuang YU <http://guangchuangyu.github.io>
+Guangchuang YU <https://guangchuangyu.github.io>
 
 School of Public Health, The University of Hong Kong 
 
@@ -36,4 +36,5 @@ library(rvcheck)
 check_r()
 check_bioc('ggtree')
 check_cran('emojifont')
+check_github("guangchuangyu/clusterProfiler")
 ```

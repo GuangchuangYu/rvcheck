@@ -2,6 +2,7 @@
 
 export(check_bioc)
 export(check_cran)
+export(check_github)
 export(check_r)
 export(update_all)
 importFrom(utils,packageVersion)

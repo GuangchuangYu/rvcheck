@@ -9,6 +9,9 @@ check_bioc(pkg = "BiocInstaller")
 \arguments{
 \item{pkg}{package name}
 }
+\value{
+list
+}
 \description{
 check latest release version of bioconductor package
 }
