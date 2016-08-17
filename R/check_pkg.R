@@ -5,6 +5,11 @@
 ##' @param pkg package name
 ##' @return list
 ##' @export
+##' @examples
+##' \dontrun{
+##' library(rvcheck)
+##' check_github('guangchuangyu/ggtree')
+##' }
 ##' @author Guangchuang Yu
 check_github <- function(pkg) {
     installed_version <- tryCatch(packageVersion(gsub(".*/", "", pkg)), error=function(e) NA)
@@ -85,7 +90,7 @@ check_release <- function(base_url, pkg, msg) {
     remote_version <- gsub("\\D+([\\.0-9]+)\\D+", '\\1', x[grep("Version", x)+1])
 
     res <- list(package = pkg,
-                installed_version = installed_version,
+                installed_version = as.character(installed_version),
                 latest_version = remote_version,
                 up_to_date = NA)
     
