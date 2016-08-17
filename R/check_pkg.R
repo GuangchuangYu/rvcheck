@@ -28,7 +28,7 @@ check_github <- function(pkg) {
         message(msg)
     } else {
         if (remote_version > installed_version) {
-            message(paste("##", pkg, "is out of date..."))
+            msg <- paste("##", pkg, "is out of date...")
             message(msg)
             res$up_to_date <- FALSE
         } else if (remote_version == installed_version) {
@@ -112,3 +112,17 @@ check_release <- function(base_url, pkg, msg) {
     
     return(res)
 }
+
+
+get_devel_version <- function(pkg) {
+    x <- readLines("DESCRIPTION");
+    y <- x[grep("^Version", x)];
+    v <- sub("Version: ", "", y)
+    if ((as.numeric(gsub("\\d+\\.(\\d+)\\.\\d+", '\\1', v)) %% 2) == 1) {
+        return(v)
+    } else {
+        ## in release copy
+        return(check_github(pkg)$latest_version)
+    }
+}
+
