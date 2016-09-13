@@ -15,6 +15,12 @@ list
 \description{
 check latest github version of R package
 }
+\examples{
+\dontrun{
+library(rvcheck)
+check_github('guangchuangyu/ggtree')
+}
+}
 \author{
 Guangchuang Yu
 }

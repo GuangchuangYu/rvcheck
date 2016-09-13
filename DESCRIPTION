@@ -1,7 +1,7 @@
 Package: rvcheck
 Type: Package
 Title: R/Package Version Check
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(person(given = "Guangchuang", family = "Yu",
 	   	    email = "guangchuangyu@gmail.com",
 		    role  = c("aut", "cre"))
@@ -11,6 +11,7 @@ Description: Check latest release version of R and R package (both in 'CRAN' or 
 Depends:
     R (>= 3.3.0)
 Imports:
+    devtools,
     utils
 License: Artistic-2.0
 Encoding: UTF-8
