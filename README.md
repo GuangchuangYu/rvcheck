@@ -1,10 +1,10 @@
 rvcheck: Check R/Package Version
 ---------
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rvcheck?color=green)](http://cran.r-project.org/package=rvcheck)
-![](http://cranlogs.r-pkg.org/badges/grand-total/rvcheck?color=green)
-![](http://cranlogs.r-pkg.org/badges/rvcheck?color=green)
-![](http://cranlogs.r-pkg.org/badges/last-week/rvcheck?color=green)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rvcheck?color=green)](https://cran.r-project.org/package=rvcheck)
+![](https://cranlogs.r-pkg.org/badges/grand-total/rvcheck?color=green)
+![](https://cranlogs.r-pkg.org/badges/rvcheck?color=green)
+![](https://cranlogs.r-pkg.org/badges/last-week/rvcheck?color=green)
 [![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics)
 
 
