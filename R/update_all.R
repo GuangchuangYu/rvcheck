@@ -1,8 +1,8 @@
 ##' update all packages
 ##'
-##' 
+##'
 ##' @title update_all
-##' @param check_R whether check R version 
+##' @param check_R whether check R version
 ##' @param which repo (CRAN, BioC, github) to update
 ##' @return NULL
 ##' @importFrom utils update.packages
@@ -26,7 +26,7 @@ update_all <- function(check_R=TRUE, which=c("CRAN", "BioC", "github")) {
     if ('BioC' %in% which) {
         update_bioc()
     }
-    
+
     if ('github' %in% which) {
         update_github()
     }
@@ -39,7 +39,8 @@ is_bioc_up_to_date <- function() {
 
 update_cran <- function() {
     message("upgrading CRAN packages...")
-    update.packages(ask=FALSE, checkBuild=TRUE)
+    tryCatch(update.packages(ask=FALSE, checkBuild=TRUE),
+             error=function(e) NULL)
 }
 
 update_bioc <- function() {

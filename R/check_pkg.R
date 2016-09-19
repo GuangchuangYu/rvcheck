@@ -1,6 +1,6 @@
 ##' check latest github version of R package
 ##'
-##' 
+##'
 ##' @title check_github
 ##' @param pkg package name
 ##' @return list
@@ -13,16 +13,16 @@
 ##' @author Guangchuang Yu
 check_github <- function(pkg) {
     installed_version <- tryCatch(packageVersion(gsub(".*/", "", pkg)), error=function(e) NA)
-    
+
     url <- paste0("https://raw.githubusercontent.com/", pkg, "/master/DESCRIPTION")
     x <- readLines(url)
     remote_version <- gsub("Version:\\s*", "", x[grep('Version:', x)])
-    
+
     res <- list(package = pkg,
                 installed_version = installed_version,
                 latest_version = remote_version,
                 up_to_date = NA)
-    
+
     if (is.na(installed_version)) {
         message(paste("##", pkg, "is not installed..."))
         message(msg)
@@ -36,13 +36,13 @@ check_github <- function(pkg) {
             res$up_to_date <- TRUE
         }
     }
-    
+
     return(res)
 }
 
 ##' check latest release version of bioconductor package
 ##'
-##' 
+##'
 ##' @title check_bioc
 ##' @param pkg package name
 ##' @return list
@@ -57,13 +57,13 @@ check_bioc <- function(pkg="BiocInstaller") {
     msg <- paste("## try http:// if https:// URLs are not supported",
                  'source("https://www.bioconductor.org/biocLite.R")',
                  paste0('biocLite("', pkg, '")'), sep="\n")
-    
+
     check_release("https://bioconductor.org/packages/", pkg, msg)
 }
 
 ##' check latest release version of cran package
 ##'
-##' 
+##'
 ##' @title check_cran
 ##' @param pkg package name
 ##' @return list
@@ -77,7 +77,7 @@ check_bioc <- function(pkg="BiocInstaller") {
 check_cran <- function(pkg) {
     msg <- paste("## try",
                  paste0('install.packages("', pkg, '")'),
-                 sep="\n") 
+                 sep="\n")
     check_release("https://cran.r-project.org/web/packages/", pkg, msg)
 }
 
@@ -93,7 +93,7 @@ check_release <- function(base_url, pkg, msg) {
                 installed_version = as.character(installed_version),
                 latest_version = remote_version,
                 up_to_date = NA)
-    
+
     if (is.na(installed_version)) {
         message(paste("##", pkg, "is not installed..."))
         message(msg)
@@ -109,20 +109,7 @@ check_release <- function(base_url, pkg, msg) {
             message("devel branch is used, this function only works for release version...")
         }
     }
-    
+
     return(res)
-}
-
-
-get_devel_version <- function(pkg) {
-    x <- readLines("DESCRIPTION");
-    y <- x[grep("^Version", x)];
-    v <- sub("Version: ", "", y)
-    if ((as.numeric(gsub("\\d+\\.(\\d+)\\.\\d+", '\\1', v)) %% 2) == 1) {
-        return(v)
-    } else {
-        ## in release copy
-        return(check_github(pkg)$latest_version)
-    }
 }
 
