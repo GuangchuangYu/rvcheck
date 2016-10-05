@@ -15,8 +15,9 @@ install:
 	cd ..;\
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
-check:
-	Rscript -e 'rcmdcheck::rcmdcheck()'
+check: build
+	cd ..;\
+	Rscript -e 'rcmdcheck::rcmdcheck("$(PKGNAME)_$(PKGVERS).tar.gz")'
 
 check2: build
 	cd ..;\
