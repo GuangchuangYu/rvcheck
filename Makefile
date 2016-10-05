@@ -15,7 +15,10 @@ install:
 	cd ..;\
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
-check: build
+check:
+	Rscript -e 'rcmdcheck::rcmdcheck()'
+
+check2: build
 	cd ..;\
 	R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
 
