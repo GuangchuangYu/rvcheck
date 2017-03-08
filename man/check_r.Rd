@@ -21,4 +21,3 @@ check_r()
 \author{
 Guangchuang Yu
 }
-

@@ -24,4 +24,3 @@ check_bioc('ggtree')
 \author{
 Guangchuang Yu
 }
-

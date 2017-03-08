@@ -20,4 +20,3 @@ load function from package
 \author{
 guangchuang yu
 }
-

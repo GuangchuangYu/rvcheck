@@ -24,4 +24,3 @@ check_cran('emojifont')
 \author{
 Guangchuang Yu
 }
-

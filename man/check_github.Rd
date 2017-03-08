@@ -24,4 +24,3 @@ check_github('guangchuangyu/ggtree')
 \author{
 Guangchuang Yu
 }
-
