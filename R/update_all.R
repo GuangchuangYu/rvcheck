@@ -39,7 +39,7 @@ is_bioc_up_to_date <- function() {
 
 update_cran <- function() {
     message("upgrading CRAN packages...")
-    tryCatch(update.packages(ask=FALSE, checkBuild=TRUE),
+    tryCatch(update.packages(ask=FALSE, checkBuilt=TRUE),
              error=function(e) NULL)
 }
 
@@ -67,12 +67,13 @@ update_bioc <- function() {
     }
 }
 
-##' @importFrom devtools install_github
+
 ##' @importFrom utils installed.packages
 ##' @importFrom utils packageDescription
 update_github <- function() {
     message("upgrading github packages...")
     pkgs <- installed.packages()[, 'Package']
+    install_github <- get_fun_from_pkg("devtools", "install_github")
     tmp <- sapply(pkgs, function(pkg) {
         desc <- packageDescription(pkg)
         if (length(desc) <= 1 || is.null(desc$GithubSHA1))
@@ -81,3 +82,4 @@ update_github <- function() {
                  error=function(e) NULL)
     })
 }
+
