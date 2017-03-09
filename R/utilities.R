@@ -26,7 +26,7 @@ o <- function() {
     if (os == "Darwin") {
 	system("open .")
     } else if (os == "Linux") {
-        system("xdg-open .")
+        system("xdg-open . &")
     }
 }
 
