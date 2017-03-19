@@ -1,6 +1,9 @@
-CHANGES IN VERSION 0.0.8
+CHANGES IN VERSION 0.0.9
 ------------------------
  o support checking gitlab version <2017-03-19, Sun>
+
+CHANGES IN VERSION 0.0.8
+------------------------
  o add read.db, o, get_fun_from_pkg functions <2017-03-08, Wed>
  
 CHANGES IN VERSION 0.0.7
