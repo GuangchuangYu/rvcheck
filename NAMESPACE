@@ -3,6 +3,7 @@
 export(check_bioc)
 export(check_cran)
 export(check_github)
+export(check_gitlab)
 export(check_r)
 export(get_fun_from_pkg)
 export(o)

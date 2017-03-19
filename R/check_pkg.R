@@ -12,9 +12,33 @@
 ##' }
 ##' @author Guangchuang Yu
 check_github <- function(pkg) {
+    check_github_gitlab(pkg, "github")
+}
+
+##' check latest gitlab version of R package
+##'
+##'
+##' @title check_gitlab
+##' @param pkg package name
+##' @return list
+##' @export
+##' @author Guangchuang Yu
+check_gitlab <- function(pkg) {
+    check_github_gitlab(pkg, "gitlab")
+}
+
+
+check_github_gitlab <- function(pkg, repo="github") {
     installed_version <- tryCatch(packageVersion(gsub(".*/", "", pkg)), error=function(e) NA)
 
-    url <- paste0("https://raw.githubusercontent.com/", pkg, "/master/DESCRIPTION")
+    if(repo == "github") {
+        url <- paste0("https://raw.githubusercontent.com/", pkg, "/master/DESCRIPTION")
+    } else if (repo == "gitlab") {
+        url <- paste0("https://gitlab.com/", pkg, "/raw/master/DESCRIPTION")
+    } else {
+        stop("only work with github and gitlab")
+    }
+    
     x <- readLines(url)
     remote_version <- gsub("Version:\\s*", "", x[grep('Version:', x)])
 
@@ -39,6 +63,7 @@ check_github <- function(pkg) {
 
     return(res)
 }
+
 
 ##' check latest release version of bioconductor package
 ##'
