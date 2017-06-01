@@ -27,6 +27,10 @@ o <- function() {
 	system("open .")
     } else if (os == "Linux") {
         system("xdg-open . &")
+    } else if (os == "Windows") {
+	wd <- sub("/", "\\", getwd())
+	cmd <- paste("explorer", wd)
+	suppressWarnings(shell(cmd))
     }
 }
 
