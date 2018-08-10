@@ -1,3 +1,7 @@
+CHANGES IN VERSION 0.1.0
+------------------------
+ o get_aes_var function
+
 CHANGES IN VERSION 0.0.9
 ------------------------
  o support checking gitlab version <2017-03-19, Sun>

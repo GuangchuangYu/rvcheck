@@ -16,7 +16,7 @@ get_fun_from_pkg <- function(pkg, fun) {
 
 ##' open working directory
 ##'
-##' 
+##'
 ##' @title o
 ##' @return NULL
 ##' @author Guangchuang Yu
@@ -36,7 +36,7 @@ o <- function() {
 
 ##' read clipboard
 ##'
-##' 
+##'
 ##' @title read.cb
 ##' @param ... parameters for read.table
 ##' @return data.frame
@@ -51,3 +51,23 @@ read.cb <- function(...) {
         read.table("clipboard", ...)
     }
 }
+
+
+
+
+##' extract aes mapping, compatible with ggplot2 < 2.3.0 & > 2.3.0
+##'
+##'
+##' @title get_aes_var
+##' @param mapping aes mapping
+##' @param var variable
+##' @return mapped var
+##' @importFrom utils tail
+##' @export
+##' @author guangchuang yu
+get_aes_var <- function(mapping, var) {
+    res <- as.character(mapping[[var]])
+    ## to compatible with ggplot2 v=2.2.2
+    tail(res, 1)
+}
+

@@ -49,7 +49,6 @@ check_github_gitlab <- function(pkg, repo="github") {
 
     if (is.na(installed_version)) {
         message(paste("##", pkg, "is not installed..."))
-        message(msg)
     } else {
         if (remote_version > installed_version) {
             msg <- paste("##", pkg, "is out of date...")
