@@ -63,10 +63,11 @@ read.cb <- function(...) {
 ##' @param var variable
 ##' @return mapped var
 ##' @importFrom utils tail
+##' @importFrom rlang quo_text
 ##' @export
 ##' @author guangchuang yu
 get_aes_var <- function(mapping, var) {
-    res <- as.character(mapping[[var]])
+    res <- rlang::quo_text(mapping[[var]])
     ## to compatible with ggplot2 v=2.2.2
     tail(res, 1)
 }
