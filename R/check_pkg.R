@@ -77,12 +77,14 @@ check_github_gitlab <- function(pkg, repo="github") {
 ##' check_bioc('ggtree')
 ##' }
 ##' @author Guangchuang Yu
-check_bioc <- function(pkg="BiocInstaller") {
-    msg <- paste("## try http:// if https:// URLs are not supported",
-                 'source("https://www.bioconductor.org/biocLite.R")',
-                 paste0('biocLite("', pkg, '")'), sep="\n")
-
-    check_release("https://bioconductor.org/packages/", pkg, msg)
+check_bioc <- function(pkg="BiocManager") {
+    msg <- paste('install.packages("BiocManager")',
+                 paste0('BiocManager::install("', pkg, '")'), sep="\n")
+    if (pkg == "BiocManager"){
+        check_cran(pkg)
+    }else{
+        check_release("https://bioconductor.org/packages/", pkg, msg)
+    }
 }
 
 ##' check latest release version of cran package
@@ -111,7 +113,7 @@ check_release <- function(base_url, pkg, msg) {
 
     url <- paste0(base_url, pkg)
     x <- readLines(url)
-    remote_version <- gsub("\\D+([\\.0-9]+)\\D+", '\\1', x[grep("Version", x)+1])
+    remote_version <- gsub("\\D+([\\.0-9]+)\\D+", '\\1', x[grep("<td>Version:</td>", x)+1])
 
     res <- list(package = pkg,
                 installed_version = as.character(installed_version),
