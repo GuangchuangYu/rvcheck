@@ -4,7 +4,7 @@
 \alias{check_bioc}
 \title{check_bioc}
 \usage{
-check_bioc(pkg = "BiocInstaller")
+check_bioc(pkg = "BiocManager")
 }
 \arguments{
 \item{pkg}{package name}
