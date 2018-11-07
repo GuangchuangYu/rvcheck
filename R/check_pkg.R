@@ -113,7 +113,7 @@ check_release <- function(base_url, pkg, msg) {
 
     url <- paste0(base_url, pkg)
     x <- readLines(url)
-    remote_version <- gsub("\\D+([\\.0-9]+)\\D+", '\\1', x[grep("<td>Version:</td>", x)+1])
+    remote_version <- gsub("\\D+([\\.0-9-]+)\\D+", '\\1', x[grep("<td>Version:</td>", x)+1])
 
     res <- list(package = pkg,
                 installed_version = as.character(installed_version),
