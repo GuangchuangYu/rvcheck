@@ -43,6 +43,7 @@ update_cran <- function() {
              error=function(e) NULL)
 }
 
+##' @importFrom utils install.packages
 update_bioc <- function() {
     pkg <- "BiocManager"
     bioc_version <- tryCatch(packageVersion(pkg), error=function(e) NULL)
