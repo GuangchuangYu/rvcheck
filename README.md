@@ -12,7 +12,8 @@ rvcheck: Check R/Package Version
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
-School of Public Health, The University of Hong Kong 
+School of Basic Medical Sciences, Southern Medical University
+
 
 ## Installation ##
 
@@ -36,5 +37,5 @@ library(rvcheck)
 check_r()
 check_bioc('ggtree')
 check_cran('emojifont')
-check_github("guangchuangyu/clusterProfiler")
+check_github("GuangchuangYu/clusterProfiler")
 ```
