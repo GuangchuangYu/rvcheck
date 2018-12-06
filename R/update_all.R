@@ -47,15 +47,36 @@ update_cran <- function() {
 update_bioc <- function() {
     pkg <- "BiocManager"
     bioc_version <- tryCatch(packageVersion(pkg), error=function(e) NULL)
+    flag <- "BiocManager"
     if (is.null(bioc_version)) {
         biocLite <- tryCatch(packageVersion("BiocInstaller"), error=function(e) NULL)
         if (is.null(biocLite)){
-            message("no Bioconductor packages found...")
+            flag <- "No_BioC"
+        } else if (check_r()$installed_version < "R-3.5.0") {
+            flag <- "BiocInstaller"
         } else {
-            message('Bioconductor 3.8 has switched to a new package manager: "BiocManager".')
-            message("The package manager is deposited in CRAN, to update Bioconductor packages,")
-            message('please install.packages("BiocManager") and re-run this command.')
+            message('Bioconductor has switched to a new package manager: "BiocManager".')
+            message("Removing BiocInstaller and install BiocManager")
+            remove.packages("BiocInstaller")
+            install.packages("BiocManager")
+            flag <- "BiocManager"
         }
+    }
+
+    if (flag == "No_BioC"){
+        message("no Bioconductor packages found...")
+    } else if (flag == "BiocInstaller") {
+        message("Your R is out-dated.")
+        message('Bioconductor 3.8 has switched to a new package manager: "BiocManager".')
+        invisible(readline(prompt="Press [enter] to continue to update Bioconductor (outdated release that fit your R version)"))
+        if ("BiocInstaller" %in% loadedNamespaces()) {
+            detach("package:BiocInstaller", character.only=TRUE)
+            remove.packages("BiocInstaller")
+            source("https://www.bioconductor.org/biocLite.R")
+        }
+        suppressPackageStartupMessages(require(pkg, character.only = TRUE))
+        biocLite <- eval(parse(text="biocLite"))
+        biocLite(ask=FALSE, checkBuilt=TRUE)
     } else {
         bioc <- is_bioc_up_to_date()
         if (is.na(bioc)) {
