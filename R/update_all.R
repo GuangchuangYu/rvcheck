@@ -48,7 +48,14 @@ update_bioc <- function() {
     pkg <- "BiocManager"
     bioc_version <- tryCatch(packageVersion(pkg), error=function(e) NULL)
     if (is.null(bioc_version)) {
-        message("no Bioconductor packages found...")
+        biocLite <- tryCatch(packageVersion("BiocInstaller"), error=function(e) NULL)
+        if (is.null(biocLite)){
+            message("no Bioconductor packages found...")
+        } else {
+            message('Bioconductor 3.8 has switched to a new package manager: "BiocManager".')
+            message("The package manager is deposited in CRAN, to update Bioconductor packages,")
+            message('please install.packages("BiocManager") and re-run this command.')
+        }
     } else {
         bioc <- is_bioc_up_to_date()
         if (is.na(bioc)) {
