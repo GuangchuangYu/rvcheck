@@ -83,7 +83,7 @@ check_bioc <- function(pkg="BiocManager") {
     if (pkg == "BiocManager"){
         check_cran(pkg)
     }else{
-        check_release("https://bioconductor.org/packages/", pkg, msg)
+        check_release("https://www.bioconductor.org/packages/", pkg, msg)
     }
 }
 
