@@ -83,7 +83,9 @@ check_bioc <- function(pkg="BiocManager") {
     if (pkg == "BiocManager"){
         check_cran(pkg)
     }else{
-        check_release("https://www.bioconductor.org/packages/", pkg, msg)
+        ## seems to be blocked in China
+        ## check_release("https://www.bioconductor.org/packages/", pkg, msg)
+        check_release("https://bioc.ism.ac.jp/packages/release/bioc/html/", pkg, msg, add_suffix=TRUE)
     }
 }
 
@@ -108,12 +110,15 @@ check_cran <- function(pkg) {
 }
 
 ##' @importFrom utils packageVersion
-check_release <- function(base_url, pkg, msg) {
+check_release <- function(base_url, pkg, msg, add_suffix=FALSE) {
     installed_version <- tryCatch(packageVersion(pkg), error=function(e) NA)
 
     url <- paste0(base_url, pkg)
+    if (add_suffix)
+        url <- paste0(url, ".html")
+
     x <- readLines(url)
-    remote_version <- gsub("\\D+([\\.0-9-]+)\\D+", '\\1', x[grep("<td>Version:</td>", x)+1])
+    remote_version <- gsub("\\D+([\\.0-9-]+)\\D+", '\\1', x[grep("<td>Version:{0,1}</td>", x)+1])
 
     res <- list(package = pkg,
                 installed_version = as.character(installed_version),
