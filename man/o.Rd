@@ -4,7 +4,10 @@
 \alias{o}
 \title{o}
 \usage{
-o()
+o(file = ".")
+}
+\arguments{
+\item{file}{to be open; open workding directory by default}
 }
 \description{
 open working directory

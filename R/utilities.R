@@ -18,19 +18,24 @@ get_fun_from_pkg <- function(pkg, fun) {
 ##'
 ##'
 ##' @title o
+##' @param file to be open; open workding directory by default
 ##' @return NULL
 ##' @author Guangchuang Yu
 ##' @export
-o <- function() {
+o <- function(file=".") {
     os <- Sys.info()[1]
     if (os == "Darwin") {
-	system("open .")
+        cmd <- paste("open", file)
+        system(cmd)
     } else if (os == "Linux") {
-        system("xdg-open . &")
+        cmd <- paste("xdg-open", file, "&")
+        system(cmd)
     } else if (os == "Windows") {
-	wd <- sub("/", "\\", getwd())
-	cmd <- paste("explorer", wd)
-	suppressWarnings(shell(cmd))
+        ## wd <- sub("/", "\\", getwd())
+        ## cmd <- paste("explorer", wd)
+        ## suppressWarnings(shell(cmd))
+        cmd <- paste("start", file)
+        shell(cmd)
     }
 }
 
