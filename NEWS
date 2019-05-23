@@ -1,6 +1,6 @@
 CHANGES IN VERSION 0.1.4
 ------------------------
- o change bioc url to the mirror, https://bioc.ism.ac.jp <2019-01-09, Wed>
+ o use default repository setting <2019-05-23, Thu>
 
 CHANGES IN VERSION 0.1.3
 ------------------------

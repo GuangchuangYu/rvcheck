@@ -82,10 +82,8 @@ check_bioc <- function(pkg="BiocManager") {
                  paste0('BiocManager::install("', pkg, '")'), sep="\n")
     if (pkg == "BiocManager"){
         check_cran(pkg)
-    }else{
-        ## seems to be blocked in China
-        ## check_release("https://www.bioconductor.org/packages/", pkg, msg)
-        check_release("https://bioc.ism.ac.jp/packages/release/bioc/html/", pkg, msg, add_suffix=TRUE)
+    } else{
+        check_release("BioCsoft", pkg, msg)
     }
 }
 
@@ -106,16 +104,26 @@ check_cran <- function(pkg) {
     msg <- paste("## try",
                  paste0('install.packages("', pkg, '")'),
                  sep="\n")
-    check_release("https://cran.r-project.org/web/packages/", pkg, msg)
+    check_release("CRAN", pkg, msg)
 }
 
 ##' @importFrom utils packageVersion
-check_release <- function(base_url, pkg, msg, add_suffix=FALSE) {
+##' @importFrom BiocManager repositories
+check_release <- function(repo, pkg, msg) {
     installed_version <- tryCatch(packageVersion(pkg), error=function(e) NA)
+    repos <- BiocManager::repositories()
+    base_url <- repos[repo]
+    n <- nchar(base_url)
+    suffix <- substring(base_url, n, n)
 
-    url <- paste0(base_url, pkg)
-    if (add_suffix)
-        url <- paste0(url, ".html")
+    if (suffix != "/") {
+        base_url <- paste0(base_url, '/')
+    }
+    if (repo == "CRAN") {
+        url <- paste0(base_url, 'web/packages/', pkg)
+    } else if (repo == "BioCsoft") {
+        url <- paste0(base_url, 'html/', pkg, '.html')
+    }
 
     x <- readLines(url)
     remote_version <- gsub("\\D+([\\.0-9-]+)\\D+", '\\1', x[grep("<td>Version:{0,1}</td>", x)+1])

@@ -10,6 +10,7 @@ Description: Check latest release version of R and R package (both in 'CRAN', 'B
 Depends:
     R (>= 3.4.0)
 Imports:
+    BiocManager,
     utils,
     rlang
 License: Artistic-2.0
