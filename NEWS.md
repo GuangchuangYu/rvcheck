@@ -1,3 +1,7 @@
+# CHANGES IN VERSION 0.1.6
+
++ check whether current valid BioC is the latest one (e.g. 3.9 and 3.10 are all valid for R 3.6) and let user select which one to install if the current valid version is not the latest one (2019-10-31, Thu)
+
 # CHANGES IN VERSION 0.1.5
 
 + compatible with new major bump (R-4) (2019-10-01, Tue)

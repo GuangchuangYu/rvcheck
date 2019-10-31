@@ -89,10 +89,34 @@ update_bioc <- function() {
             remove.packages("BiocManager")
             install.packages("BiocManager")
         }
+
+        x <- readLines("https://bioconductor.org/about/release-announcements/")
+        i <- grep("/news/bioc_\\d_\\d+_release", x)[1]
+        remote_version <- sub(".*(\\d\\.\\d{1,2}).*", "\\1", x[i])
+        version <- eval(parse(text = "BiocManager::version"))
+        local_version <- as.character(version())
+        major <- function(version) as.numeric(sub("\\.\\d+$",  "", version))
+        minor <- function(version) as.numeric(sub("^\\d\\.",  "", version))
+
+        install <- eval(parse(text="BiocManager::install"))
+        install_version <- local_version
+
+        if (local_version < remote_version ||
+            major(local_version) < major(remote_version) ||
+            (major(local_version) == major(remote_version) &&
+             minor(local_version) < minor(remote_version))
+            ) {
+            versions <- c(remote_version, local_version)
+            i <- utils::menu(versions, title="Which Bioconductor version to install?")
+            ## invisible(readline(prompt=paste0("Press [enter] to continue to upgrade to Bioconductor (",
+            ##                                 remote_version, ")")))
+            install_version <- versions[i]
+        }
+
         message("upgrading BioC packages...")
         suppressPackageStartupMessages(require(pkg, character.only = TRUE))
-        install <- eval(parse(text="BiocManager::install"))
-        install(ask=FALSE, checkBuilt=TRUE)
+        install(ask=FALSE, checkBuilt=TRUE, version = install_version)
+        
     }
 }
 
