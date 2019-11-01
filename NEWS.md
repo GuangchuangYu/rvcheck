@@ -1,3 +1,7 @@
+# CHANGES IN VERSION 0.1.7
+
++ supports open file within RStudio-server or by web-browser (2019-11-1, Fri)
+
 # CHANGES IN VERSION 0.1.6
 
 + check whether current valid BioC is the latest one (e.g. 3.9 and 3.10 are all valid for R 3.6) and let user select which one to install if the current valid version is not the latest one (2019-10-31, Thu)
