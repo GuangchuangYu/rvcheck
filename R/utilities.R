@@ -23,20 +23,55 @@ get_fun_from_pkg <- function(pkg, fun) {
 ##' @author Guangchuang Yu
 ##' @export
 o <- function(file=".") {
+  is_r_server <- function(){
+    if(!exists("RStudio.Version")) return(FALSE)
+    if(!is.function(RStudio.Version)) return(FALSE)
+    RStudio.Version()$mode == 'server'
+  }
+
+  if (is_r_server()) {
+    while (Sys.getenv("rserver_ip") == "") {
+      Sys.setenv(rserver_ip = readline("Set your RStudio Server IP address: "))
+    }
+    cat("Got!")
+    while (Sys.getenv("rserver_port") == "") {
+      Sys.setenv(rserver_port = readline("Set your RStudio Server port: "))
+    }
+    cat("Got!")
+
+    if (!file.exists(file)) {
+      stop("File ", file, " does not exist!")
+    } else {
+      rserver_ip = Sys.getenv("rserver_ip")
+      rserver_port = Sys.getenv("rserver_port")
+      if (!startsWith(rserver_ip, "http")) {
+        rserver_ip = paste0("http://", rserver_ip)
+      }
+      utils::browseURL(
+        paste0(
+          paste(rserver_ip, rserver_port, sep=":"),
+          "/file_show?path=",
+          file
+        ))
+    }
+
+  } else {
     os <- Sys.info()[1]
     if (os == "Darwin") {
-        cmd <- paste("open", file)
-        system(cmd)
+      cmd <- paste("open", file)
+      system(cmd)
     } else if (os == "Linux") {
-        cmd <- paste("xdg-open", file, "&")
-        system(cmd)
+      cmd <- paste("xdg-open", file, "&")
+      system(cmd)
     } else if (os == "Windows") {
-        ## wd <- sub("/", "\\", getwd())
-        ## cmd <- paste("explorer", wd)
-        ## suppressWarnings(shell(cmd))
-        cmd <- paste("start", file)
-        shell(cmd)
+      ## wd <- sub("/", "\\", getwd())
+      ## cmd <- paste("explorer", wd)
+      ## suppressWarnings(shell(cmd))
+      cmd <- paste("start", file)
+      shell(cmd)
     }
+  }
+
 }
 
 ##' read clipboard
