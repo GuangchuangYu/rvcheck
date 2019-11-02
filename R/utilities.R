@@ -34,6 +34,9 @@ is.rserver <- function(){
 o <- function(file=".") {
     os <- Sys.info()[1]
     if (is.rserver()) {
+        if (dir.exists(file)) {
+            stop("open directory in RStudio Server is not supported.")
+        }
         rserver_ip <- getOption("rserver_ip")
         if (!is.null(rserver_ip)) {
             rserver_port <- getOption("rserver_port") %||% '8787' 
