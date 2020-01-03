@@ -4,12 +4,14 @@
 \alias{update_all}
 \title{update_all}
 \usage{
-update_all(check_R = TRUE, which = c("CRAN", "BioC", "github"))
+update_all(check_R = TRUE, which = c("CRAN", "BioC", "github"), lib.loc = NULL)
 }
 \arguments{
 \item{check_R}{whether check R version}
 
 \item{which}{repo (CRAN, BioC, github) to update}
+
+\item{lib.loc}{location of library, default is NULL and will set to .libPaths()}
 }
 \description{
 update all packages

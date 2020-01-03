@@ -1,7 +1,7 @@
 Package: rvcheck
 Type: Package
 Title: R/Package Version Check
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: c(person(given = "Guangchuang", family = "Yu", email = "guangchuangyu@gmail.com", role  = c("aut", "cre")),
              person(given = "Chun-hui", family = "Gao", email = "gaospecial@gmail.com", role = "ctb")
 	         )
@@ -16,4 +16,4 @@ Imports:
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

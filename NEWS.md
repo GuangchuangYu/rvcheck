@@ -1,3 +1,8 @@
+# CHANGES IN VERSION 0.1.8
+
++ update corresponding github branch and allow user to specify lib.loc (2020-01-03, Fri)
+  - <https://github.com/GuangchuangYu/rvcheck/issues/7>
+
 # CHANGES IN VERSION 0.1.7
 
 + supports open file within RStudio-server or by web-browser (2019-11-1, Fri)
