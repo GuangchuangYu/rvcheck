@@ -14,6 +14,20 @@ get_fun_from_pkg <- function(pkg, fun) {
     eval(parse(text = fun))
 }
 
+##' check whether packages were installed
+##'
+##' check whether selected packages were installed 
+##' @title is.installed
+##' @param packages selected packagtes
+##' @return logical vector
+##' @export
+##' @author Guangchuang Yu
+is.installed <- function(packages) {
+    vapply(packages, function(pkg) {
+        system.file(package = pkg) != ""
+        }, logical(1))
+}
+
 is.rserver <- function(){
     RStudio.Version = tryCatch(get("RStudio.Version"), error = function(e) NULL)
     if(is.null(RStudio.Version)) return(FALSE)

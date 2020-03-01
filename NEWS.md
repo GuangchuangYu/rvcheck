@@ -1,5 +1,6 @@
 # CHANGES IN VERSION 0.1.8
 
++ `is.installed` function to check whether packages were installed (2020-03-01, Sun)
 + update corresponding github branch and allow user to specify lib.loc (2020-01-03, Fri)
   - <https://github.com/GuangchuangYu/rvcheck/issues/7>
 
