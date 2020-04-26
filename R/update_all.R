@@ -5,6 +5,7 @@
 ##' @param check_R whether check R version
 ##' @param which repo (CRAN, BioC, github) to update
 ##' @param lib.loc location of library, default is NULL and will set to .libPaths()
+##' @param ... additional parameters to install packages
 ##' @return NULL
 ##' @importFrom utils update.packages
 ##' @importFrom utils remove.packages
@@ -15,21 +16,21 @@
 ##' update_all()
 ##' }
 ##' @author Guangchuang Yu
-update_all <- function(check_R=TRUE, which=c("CRAN", "BioC", "github"), lib.loc = NULL) {
+update_all <- function(check_R=TRUE, which=c("CRAN", "BioC", "github"), lib.loc = NULL, ...) {
     if (check_R && !check_r()$up_to_date) {
         stop("you need to upgrade your R first...")
     }
 
     if ('CRAN' %in% which) {
-        update_cran(lib.loc = lib.loc)
+        update_cran(lib.loc = lib.loc, ...)
     }
 
     if ('BioC' %in% which) {
-        update_bioc(lib.loc = lib.loc)
+        update_bioc(lib.loc = lib.loc, ...)
     }
 
     if ('github' %in% which) {
-        update_github(lib.loc = lib.loc)
+        update_github(lib.loc = lib.loc, ...)
     }
     message("done....")
 }
@@ -38,16 +39,16 @@ is_bioc_up_to_date <- function() {
     suppressMessages(check_bioc()$up_to_date)
 }
 
-update_cran <- function(lib.loc = NULL) {
+update_cran <- function(lib.loc = NULL, ...) {
     message("upgrading CRAN packages...")
     tryCatch(update.packages(lib.loc = lib.loc,
                              ask=FALSE,
-                             checkBuilt=TRUE),
+                             checkBuilt=TRUE, ...),
              error=function(e) NULL)
 }
 
 ##' @importFrom utils install.packages
-update_bioc <- function(lib.loc = NULL) {
+update_bioc <- function(lib.loc = NULL, ...) {
     pkg <- "BiocManager"
     bioc_version <- tryCatch(packageVersion(pkg, lib.loc = lib.loc), error=function(e) NULL)
     flag <- "BiocManager"
@@ -118,7 +119,7 @@ update_bioc <- function(lib.loc = NULL) {
 
         message("upgrading BioC packages...")
         suppressPackageStartupMessages(require(pkg, character.only = TRUE))
-        install(ask=FALSE, checkBuilt=TRUE, version = install_version, lib.loc = lib.loc)
+        install(ask=FALSE, checkBuilt=TRUE, version = install_version, lib.loc = lib.loc, ...)
         
     }
 }
@@ -126,7 +127,7 @@ update_bioc <- function(lib.loc = NULL) {
 
 ##' @importFrom utils installed.packages
 ##' @importFrom utils packageDescription
-update_github <- function(lib.loc = NULL) {
+update_github <- function(lib.loc = NULL, ...) {
     message("upgrading github packages...")
     pkgs <- installed.packages()[, 'Package']
     install_github <- get_fun_from_pkg("remotes", "install_github")
@@ -137,7 +138,7 @@ update_github <- function(lib.loc = NULL) {
         tryCatch(install_github(repo=paste0(desc$GithubUsername, '/', desc$GithubRepo),
                                 ref = desc$GithubRef,
                                 checkBuilt=TRUE,
-                                lib.loc = lib.loc),
+                                lib.loc = lib.loc, ...),
                  error=function(e) NULL)
     })
 }
