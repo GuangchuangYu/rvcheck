@@ -127,6 +127,7 @@ update_bioc <- function(lib.loc = NULL, ...) {
 
 ##' @importFrom utils installed.packages
 ##' @importFrom utils packageDescription
+##' @importFrom yulab.utils get_fun_from_pkg
 update_github <- function(lib.loc = NULL, ...) {
     message("upgrading github packages...")
     pkgs <- installed.packages()[, 'Package']

@@ -1,3 +1,8 @@
+# CHANGES IN VERSION 0.2.0
+
++ mv `o`, `is.installed`, `read.cb`, `o`, `get_fun_from_pkg` functions to 'yulab.utils' package (2021-08-17, Tue)
++ mv `get_aes_var` to 'ggfun' package
+
 # CHANGES IN VERSION 0.1.8
 
 + `is.installed` function to check whether packages were installed (2020-03-01, Sun)
