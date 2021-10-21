@@ -1,12 +1,13 @@
 Package: rvcheck
 Type: Package
 Title: R/Package Version Check
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person(given = "Guangchuang", family = "Yu", email = "guangchuangyu@gmail.com", role  = c("aut", "cre")),
              person(given = "Chun-hui", family = "Gao", email = "gaospecial@gmail.com", role = "ctb")
 	         )
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
 Description: Check latest release version of R and R package (both in 'CRAN', 'Bioconductor' or 'Github').
+URL: https://github.com/GuangchuangYu/rvcheck
 Depends:
     R (>= 3.4.0)
 Imports:
@@ -15,4 +16,4 @@ Imports:
     yulab.utils
 License: Artistic-2.0
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
